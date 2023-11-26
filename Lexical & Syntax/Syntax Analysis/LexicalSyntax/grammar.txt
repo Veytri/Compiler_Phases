@@ -1,0 +1,20 @@
+# Definition of the grammar rules for a simple programming language
+
+# Program consists of zero or more statements
+Program: Stmt*
+
+# Statement is defined as an additive expression
+Stmt: AdditiveExpr
+
+# Additive expression is composed of multiplicative expressions
+# with optional + or - operators in between
+AdditiveExpr: MultiplicativeExpr((PLUS | MINUS) MultiplicativeExpr)
+
+# Multiplicative expression is composed of factors with optional
+# multiplication or division operators in between
+MultiplicativeExpr: Factor((MUL | DIV) Factor)*
+
+# Factor is defined as an integer 
+# or AdditiveExpr with open and close parenthesis
+Factor: INTEGER
+    | (Open_Paren) AdditiveExpr (Close_Paren)
